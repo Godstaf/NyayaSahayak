@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* NyayaSahayak Design System - Bold Liquid Glass with Purple Gradient */
+
+@layer base {
+  :root {
+    /* Purple Gradient Core Palette */
+    --background: 270 50% 5%;
+    --foreground: 270 20% 95%;
+
+    --card: 270 40% 8%;
+    --card-foreground: 270 20% 95%;
+
+    --popover: 270 40% 10%;
+    --popover-foreground: 270 20% 95%;
+
+    --primary: 270 80% 60%;
+    --primary-foreground: 270 20% 98%;
+
+    --secondary: 300 60% 50%;
+    --secondary-foreground: 300 20% 98%;
+
+    --muted: 270 30% 15%;
+    --muted-foreground: 270 20% 65%;
+
+    --accent: 280 100% 65%;
+    --accent-foreground: 280 20% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 270 30% 20%;
+    --input: 270 30% 15%;
+    --ring: 270 80% 60%;
+
+    --radius: 1rem;
+
+    /* Glass Effect Tokens */
+    --glass-bg: 270 40% 12% / 0.6;
+    --glass-border: 270 50% 40% / 0.3;
+    --glass-blur: 20px;
+    --glass-shadow: 0 8px 32px 0 hsl(270 80% 20% / 0.4);
+
+    /* Gradient Tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(270 80% 60%), hsl(300 70% 55%), hsl(330 80% 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(280 90% 65%), hsl(260 80% 50%));
+    --gradient-glow: radial-gradient(ellipse at center, hsl(270 80% 60% / 0.4), transparent 70%);
+    --gradient-mesh:
+      radial-gradient(at 20% 30%, hsl(270 80% 50% / 0.3) 0%, transparent 50%),
+      radial-gradient(at 80% 20%, hsl(300 70% 55% / 0.25) 0%, transparent 50%),
+      radial-gradient(at 60% 80%, hsl(330 80% 60% / 0.2) 0%, transparent 50%),
+      radial-gradient(at 10% 90%, hsl(280 90% 65% / 0.15) 0%, transparent 50%);
+
+    /* Animation Tokens */
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Sidebar */
+    --sidebar-background: 270 40% 8%;
+    --sidebar-foreground: 270 20% 90%;
+    --sidebar-primary: 270 80% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 270 40% 15%;
+    --sidebar-accent-foreground: 270 20% 95%;
+    --sidebar-border: 270 30% 20%;
+    --sidebar-ring: 270 80% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-image: var(--gradient-mesh);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+
+  /* Glass Card Utility */
+  .glass {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(12px);
+    /* Reduced from 20px for better performance */
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--glass-border));
+    box-shadow: var(--glass-shadow);
+    will-change: transform;
+    /* GPU hint */
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300;
+  }
+
+  .glass-hover:hover {
+    background: hsl(270 40% 15% / 0.7);
+    border-color: hsl(270 60% 50% / 0.5);
+    box-shadow: 0 12px 40px 0 hsl(270 80% 30% / 0.5);
+    transform: translateY(-2px);
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Animated Gradient Background - slowed down for less CPU usage */
+  .animated-gradient {
+    background: linear-gradient(-45deg,
+        hsl(270 80% 50%),
+        hsl(300 70% 55%),
+        hsl(330 80% 60%),
+        hsl(280 90% 65%));
+    background-size: 300% 300%;
+    /* Reduced from 400% */
+    animation: gradient-shift 30s ease infinite;
+    /* Slowed from 15s to 30s */
+    will-change: background-position;
+  }
+
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Glow Effects */
+  .glow {
+    box-shadow:
+      0 0 20px hsl(270 80% 60% / 0.4),
+      0 0 40px hsl(270 80% 60% / 0.2),
+      0 0 60px hsl(270 80% 60% / 0.1);
+  }
+
+  .glow-text {
+    text-shadow:
+      0 0 10px hsl(270 80% 60% / 0.8),
+      0 0 20px hsl(270 80% 60% / 0.5),
+      0 0 30px hsl(270 80% 60% / 0.3);
+  }
+
+  /* 3D Tilt Effect Base */
+  .tilt-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  /* Floating Animation - reduced for performance */
+  .float {
+    animation: float 8s ease-in-out infinite;
+    /* Slowed from 6s */
+    will-change: transform;
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-6px);
+    }
+
+    /* Reduced from 10px */
+  }
+
+  /* Pulse Glow Animation */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+
+    0%,
+    100% {
+      box-shadow:
+        0 0 20px hsl(270 80% 60% / 0.4),
+        0 0 40px hsl(270 80% 60% / 0.2);
+    }
+
+    50% {
+      box-shadow:
+        0 0 30px hsl(270 80% 60% / 0.6),
+        0 0 60px hsl(270 80% 60% / 0.3);
+    }
+  }
+
+  /* Shimmer Effect */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        hsl(270 80% 60% / 0.2),
+        transparent);
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      left: -100%;
+    }
+
+    100% {
+      left: 100%;
+    }
+  }
+
+  /* Smooth Page Transitions */
+  .page-enter {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.5s var(--transition-smooth);
+  }
+
+  /* Typing Cursor */
+  .typing-cursor {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+
+    0%,
+    50% {
+      opacity: 1;
+    }
+
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
+}
